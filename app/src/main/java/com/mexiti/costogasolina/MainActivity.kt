@@ -71,13 +71,13 @@ fun CostGasLayout(name: String) {
     var propinaEntrada by remember {
         mutableStateOf("")
     }
-    var darPropina by remember {
+    var NuevaPropina by remember {
         mutableStateOf(false)
     }
     val precioLitro = precioLitroEntrada.toDoubleOrNull() ?: 0.0
     val cantLitros = cantLitrosEntrada.toDoubleOrNull() ?: 0.0
     val propina = propinaEntrada.toDoubleOrNull() ?: 0.0
-    val total = calcularMonto(precioLitro,cantLitros, darPropina = darPropina, propina = propina)
+    val total = calcularMonto(precioLitro,cantLitros, NuevaPropina = NuevaPropina, propina = propina)
 
     Column (
         modifier = Modifier.fillMaxSize()
@@ -124,13 +124,15 @@ fun CostGasLayout(name: String) {
             value = propinaEntrada,
             onValueChanged = {propinaEntrada = it}
         )
-        AddTip(darPropina = darPropina
-            , onTipCheckedChange = {darPropina = it}
+        AgregarPropina(NuevaPropina = NuevaPropina
+            , onTipCheckedChange = {NuevaPropina = it}
         )
         Text(
             text = stringResource(R.string.monto_total,total    ),
             fontWeight = FontWeight.Black,
-            fontSize = 30.sp
+            fontSize = 30.sp,
+            textAlign = TextAlign.Center,
+            modifier = Modifier.fillMaxWidth()
 
         )
 
@@ -162,8 +164,8 @@ fun EditNumberField(
 
 
 @Composable
-fun AddTip(
-    darPropina: Boolean,
+fun AgregarPropina(
+    NuevaPropina: Boolean,
     onTipCheckedChange: (Boolean) -> Unit,
     modifier: Modifier = Modifier
 ){
@@ -178,7 +180,7 @@ fun AddTip(
             modifier = Modifier.padding(20.dp)
         )
         Switch(
-            checked = darPropina ,
+            checked = NuevaPropina ,
             onCheckedChange = onTipCheckedChange
         )
     }
@@ -191,16 +193,16 @@ fun AddTip(
 
 
 
-private fun calcularMonto(precio: Double, cantLitros: Double, darPropina: Boolean, propina:Double ): String{
+private fun calcularMonto(precio: Double, cantLitros: Double, NuevaPropina: Boolean, propina:Double ): String{
     var monto = precio * cantLitros
-    if ( darPropina){
+    if ( NuevaPropina){
         monto +=  propina
     }
     return NumberFormat.getCurrencyInstance().format(monto)
 
 }
 
-@Preview(showBackground = true)
+@Preview()
 @Composable
 fun CostGasLayoutPreview() {
     CostoGasolinaTheme {
