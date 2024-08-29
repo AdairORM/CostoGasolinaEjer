@@ -92,7 +92,8 @@ fun CostGasLayout(name: String) {
             fontWeight = FontWeight.Black,
             fontSize = 25.sp
             ,
-            textAlign = TextAlign.Center
+            textAlign = TextAlign.Center,
+            color = Color.Black
             )
        EditNumberField(
            label = R.string.ingresa_gasolina,
@@ -132,7 +133,9 @@ fun CostGasLayout(name: String) {
             fontWeight = FontWeight.Black,
             fontSize = 30.sp,
             textAlign = TextAlign.Center,
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier.fillMaxWidth(),
+            color = Color.Black
+
 
         )
 
@@ -177,7 +180,9 @@ fun AgregarPropina(
     ) {
         Text(
             text = stringResource(id = R.string.agregar_propina),
-            modifier = Modifier.padding(20.dp)
+            modifier = Modifier.padding(20.dp),
+            color = Color.Black
+
         )
         Switch(
             checked = NuevaPropina ,
